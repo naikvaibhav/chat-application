@@ -11,11 +11,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { ChatModule } from './chat/chat.module';
 import { UserModule } from './user/user.module';
 import { LoginComponent } from './user/login/login.component';
-
 import { HttpClientModule } from '@angular/common/http';
 import { AppService } from './app.service';
+import { ToastrModule } from 'ngx-toastr';
+import { FormsModule } from '@angular/forms';
 
-;
 
 
 @NgModule({
@@ -24,20 +24,21 @@ import { AppService } from './app.service';
   ],
   imports: [
     BrowserModule,
-    
+    FormsModule,
     ChatModule,
     UserModule,
     HttpClientModule,
     AppRoutingModule,
-    
+
+    ToastrModule.forRoot(),
 
     RouterModule.forRoot([
-      { path:'login', component:LoginComponent, pathMatch:'full'},
-      { path:'', redirectTo:'login', pathMatch:'full'},
-      { path:'*', component:LoginComponent},
-      { path:'**', component:LoginComponent}
+      { path: 'login', component: LoginComponent, pathMatch: 'full' },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      { path: '*', component: LoginComponent },
+      { path: '**', component: LoginComponent }
     ])
-    
+
   ],
   providers: [AppService],
   bootstrap: [AppComponent]

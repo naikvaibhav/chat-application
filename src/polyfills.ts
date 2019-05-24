@@ -58,6 +58,11 @@
 import 'zone.js/dist/zone';  // Included with Angular CLI.
 
 
+
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+
+//global defined for socker.io client in polyfills.ts
+
+(window as any).global = window

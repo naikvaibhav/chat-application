@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 import 'rxjs/add/operator/catch';
@@ -20,6 +20,15 @@ export class AppService {
   private url ='https://chatapi.edwisor.com';
 
   constructor(public http:HttpClient) { }
+
+  public getUserInfoFromLocalStorage = ()=>{
+    return JSON.parse(localStorage.getItem('userInfo'));
+  }
+
+  public setUserInfoInLocalStorage = (data)=>{
+    localStorage.setItem('userInfo',JSON.stringify(data))
+
+  }
 
   public signupFunction(data) : Observable<any> {
     const params = new HttpParams()
@@ -42,12 +51,15 @@ export class AppService {
     return this.http.post(`${this.url}/api/v1/users/login`, params);
   }// end of signin function
 
-  /*private handleError(err : HttpErrorResponse){
-    let errorMessage = '';
-    if(err.error instanceof Error){
-      errorMessage = `An error occured: ${err.error.message}`;
 
-    }
+  public logout(): Observable<any> {
 
-  }*/
+    const params = new HttpParams()
+      .set('authToken', Cookie.get('authtoken'))
+
+    return this.http.post(`${this.url}/api/v1/users/logout`, params);
+
+  }
+ 
+  
 }
